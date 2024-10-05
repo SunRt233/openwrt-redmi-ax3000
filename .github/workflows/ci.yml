@@ -14,11 +14,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo add-apt-repository ppa:npalix/coccinelle
+          sudo add-apt-repository ppa:npalix/coccinelle -y
           sudo apt update
           sudo apt install build-essential clang flex g++ gawk gcc-multilib gettext \
             git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev \
-            coccinelle
+            coccinelle -y
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -36,6 +36,7 @@ jobs:
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a
+          git submodule update
 
       - name: Configure
         run: |
@@ -43,29 +44,175 @@ jobs:
             CONFIG_TARGET_ipq50xx=y
             CONFIG_TARGET_ipq50xx_arm=y
             CONFIG_TARGET_MULTI_PROFILE=y
-            CONFIG_TARGET_ALL_PROFILES=y
-            CONFIG_TARGET_PER_DEVICE_ROOTFS=y
-
-            CONFIG_ATH11K_MEM_PROFILE_256M=y
-
-            CONFIG_IB=y
-            # CONFIG_IB_STANDALONE is not set
-            CONFIG_SDK=y
-            CONFIG_MAKE_TOOLCHAIN=y
-
+            CONFIG_TARGET_DEVICE_ipq50xx_arm_DEVICE_cmcc_rax3000q=y
+            CONFIG_TARGET_DEVICE_PACKAGES_ipq50xx_arm_DEVICE_cmcc_rax3000q=""
+            CONFIG_TARGET_DEVICE_ipq50xx_arm_DEVICE_redmi_ax3000=y
+            CONFIG_TARGET_DEVICE_PACKAGES_ipq50xx_arm_DEVICE_redmi_ax3000=""
+            CONFIG_TARGET_DEVICE_ipq50xx_arm_DEVICE_xiaomi_cr881x=y
+            CONFIG_TARGET_DEVICE_PACKAGES_ipq50xx_arm_DEVICE_xiaomi_cr881x=""
+            CONFIG_ALL_KMODS=y
             CONFIG_ALL_NONSHARED=y
-            CONFIG_REPRODUCIBLE_DEBUG_INFO=y
-
+            CONFIG_TARGET_PER_DEVICE_ROOTFS=y
+            # CONFIG_ATH11K_MEM_PROFILE_1G is not set
+            CONFIG_ATH11K_MEM_PROFILE_256M=y
+            CONFIG_IB=y
+            CONFIG_LIBCURL_COOKIES=y
+            CONFIG_LIBCURL_FILE=y
+            CONFIG_LIBCURL_FTP=y
+            CONFIG_LIBCURL_HTTP=y
+            CONFIG_LIBCURL_NGHTTP2=y
+            CONFIG_LIBCURL_NO_SMB="!"
+            CONFIG_LIBCURL_PROXY=y
+            CONFIG_LIBCURL_WOLFSSL=y
+            CONFIG_LUCI_LANG_en=y
+            CONFIG_LUCI_LANG_zh_Hans=y
+            CONFIG_LUCI_LANG_zh_Hant=y
+            CONFIG_MAKE_TOOLCHAIN=y
+            CONFIG_OPENSSL_ENGINE=y
+            CONFIG_OPENSSL_PREFER_CHACHA_OVER_GCM=y
+            CONFIG_OPENSSL_WITH_ASM=y
+            CONFIG_OPENSSL_WITH_CHACHA_POLY1305=y
+            CONFIG_OPENSSL_WITH_CMS=y
+            CONFIG_OPENSSL_WITH_DEPRECATED=y
+            CONFIG_OPENSSL_WITH_ERROR_MESSAGES=y
+            CONFIG_OPENSSL_WITH_PSK=y
+            CONFIG_OPENSSL_WITH_SRP=y
+            CONFIG_OPENSSL_WITH_TLS13=y
+            CONFIG_PACKAGE_bash=y
+            CONFIG_PACKAGE_bridge=m
+            CONFIG_PACKAGE_cgi-io=y
+            CONFIG_PACKAGE_collectd=y
+            CONFIG_PACKAGE_collectd-mod-cpu=y
+            CONFIG_PACKAGE_collectd-mod-interface=y
+            CONFIG_PACKAGE_collectd-mod-iwinfo=y
+            CONFIG_PACKAGE_collectd-mod-load=y
+            CONFIG_PACKAGE_collectd-mod-memory=y
+            CONFIG_PACKAGE_collectd-mod-network=y
+            CONFIG_PACKAGE_collectd-mod-rrdtool=y
+            CONFIG_PACKAGE_curl=y
+            CONFIG_PACKAGE_etherwake=y
+            CONFIG_PACKAGE_ip-tiny=y
+            CONFIG_PACKAGE_ipset=y
+            CONFIG_PACKAGE_iptables-mod-conntrack-extra=y
+            CONFIG_PACKAGE_iptables-mod-extra=y
+            CONFIG_PACKAGE_iptables-mod-ipopt=y
             CONFIG_PACKAGE_kmod-bonding=y
-            CONFIG_PACKAGE_kmod-qca-nss-ecm-standard=y
+            CONFIG_PACKAGE_kmod-crypto-hash=y
+            CONFIG_PACKAGE_kmod-crypto-kpp=y
+            CONFIG_PACKAGE_kmod-crypto-lib-chacha20=y
+            CONFIG_PACKAGE_kmod-crypto-lib-chacha20poly1305=y
+            CONFIG_PACKAGE_kmod-crypto-lib-curve25519=y
+            CONFIG_PACKAGE_kmod-crypto-lib-poly1305=y
+            CONFIG_PACKAGE_kmod-ipt-conntrack-extra=y
+            CONFIG_PACKAGE_kmod-ipt-extra=y
+            CONFIG_PACKAGE_kmod-ipt-ipopt=y
+            CONFIG_PACKAGE_kmod-ipt-ipset=y
+            CONFIG_PACKAGE_kmod-ipt-raw=y
+            CONFIG_PACKAGE_kmod-nfnetlink=y
             CONFIG_PACKAGE_kmod-qca-nss-drv-pppoe=y
-
+            CONFIG_PACKAGE_kmod-qca-nss-ecm-standard=y
+            CONFIG_PACKAGE_kmod-udptunnel4=y
+            CONFIG_PACKAGE_kmod-udptunnel6=y
+            CONFIG_PACKAGE_kmod-wireguard=y
+            CONFIG_PACKAGE_libcap=y
+            CONFIG_PACKAGE_libcurl=y
+            CONFIG_PACKAGE_libipset=y
+            CONFIG_PACKAGE_libiwinfo-lua=y
+            CONFIG_PACKAGE_libltdl=y
+            CONFIG_PACKAGE_liblua=y
+            CONFIG_PACKAGE_liblucihttp=y
+            CONFIG_PACKAGE_liblucihttp-lua=y
+            CONFIG_PACKAGE_libmnl=y
+            CONFIG_PACKAGE_libncurses=y
+            CONFIG_PACKAGE_libnghttp2=y
+            CONFIG_PACKAGE_libopenssl=y
+            CONFIG_PACKAGE_libreadline=y
+            CONFIG_PACKAGE_librrd1=y
+            CONFIG_PACKAGE_librt=y
+            CONFIG_PACKAGE_libubus-lua=y
+            CONFIG_PACKAGE_libuci-lua=y
+            CONFIG_PACKAGE_libuv=y
+            CONFIG_PACKAGE_libwebsockets-full=y
+            CONFIG_PACKAGE_lua=y
             CONFIG_PACKAGE_luci=y
-
             CONFIG_PACKAGE_luci-app-argon-config=y
-            CONFIG_PACKAGE_luci-theme-argon=y
+            CONFIG_PACKAGE_luci-app-firewall=y
+            CONFIG_PACKAGE_luci-app-mwan3=y
+            CONFIG_PACKAGE_luci-app-opkg=y
+            CONFIG_PACKAGE_luci-app-statistics=y
+            CONFIG_PACKAGE_luci-app-ttyd=y
+            CONFIG_PACKAGE_luci-app-udpxy=y
+            CONFIG_PACKAGE_luci-app-uhttpd=y
             CONFIG_PACKAGE_luci-app-wireguard=y
+            CONFIG_PACKAGE_luci-app-wol=y
+            CONFIG_PACKAGE_luci-app-xinetd=y
+            CONFIG_PACKAGE_luci-base=y
+            CONFIG_PACKAGE_luci-compat=y
+            CONFIG_PACKAGE_luci-i18n-argon-config-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-argon-config-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-base-en=y
+            CONFIG_PACKAGE_luci-i18n-base-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-base-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-firewall-en=y
+            CONFIG_PACKAGE_luci-i18n-firewall-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-firewall-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-mwan3-en=y
+            CONFIG_PACKAGE_luci-i18n-mwan3-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-mwan3-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-opkg-en=y
+            CONFIG_PACKAGE_luci-i18n-opkg-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-opkg-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-statistics-en=y
+            CONFIG_PACKAGE_luci-i18n-statistics-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-statistics-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-ttyd-en=y
+            CONFIG_PACKAGE_luci-i18n-ttyd-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-ttyd-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-udpxy-en=y
+            CONFIG_PACKAGE_luci-i18n-udpxy-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-udpxy-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-uhttpd-en=y
+            CONFIG_PACKAGE_luci-i18n-uhttpd-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-uhttpd-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-wireguard-en=y
+            CONFIG_PACKAGE_luci-i18n-wireguard-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-wireguard-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-wol-en=y
+            CONFIG_PACKAGE_luci-i18n-wol-zh-cn=y
+            CONFIG_PACKAGE_luci-i18n-wol-zh-tw=y
+            CONFIG_PACKAGE_luci-i18n-xinetd-en=y
+            CONFIG_PACKAGE_luci-lib-base=y
+            CONFIG_PACKAGE_luci-lib-ip=y
+            CONFIG_PACKAGE_luci-lib-jsonc=y
+            CONFIG_PACKAGE_luci-lib-nixio=y
+            CONFIG_PACKAGE_luci-mod-admin-full=y
+            CONFIG_PACKAGE_luci-mod-network=y
+            CONFIG_PACKAGE_luci-mod-status=y
+            CONFIG_PACKAGE_luci-mod-system=y
+            CONFIG_PACKAGE_luci-proto-ipv6=y
+            CONFIG_PACKAGE_luci-proto-ppp=y
             CONFIG_PACKAGE_luci-proto-wireguard=y
+            CONFIG_PACKAGE_luci-theme-argon=y
+            CONFIG_PACKAGE_luci-theme-bootstrap=y
+            CONFIG_PACKAGE_mwan3=y
+            CONFIG_PACKAGE_rpcd=y
+            CONFIG_PACKAGE_rpcd-mod-file=y
+            CONFIG_PACKAGE_rpcd-mod-iwinfo=y
+            CONFIG_PACKAGE_rpcd-mod-luci=y
+            CONFIG_PACKAGE_rpcd-mod-rrdns=y
+            CONFIG_PACKAGE_rrdtool1=y
+            CONFIG_PACKAGE_terminfo=y
+            CONFIG_PACKAGE_ttyd=y
+            CONFIG_PACKAGE_udpxy=y
+            CONFIG_PACKAGE_uhttpd=y
+            CONFIG_PACKAGE_uhttpd-mod-ubus=y
+            CONFIG_PACKAGE_wireguard-tools=y
+            CONFIG_PACKAGE_xinetd=y
+            CONFIG_PACKAGE_zlib=y
+            CONFIG_REPRODUCIBLE_DEBUG_INFO=y
+            CONFIG_SDK=y
+            CONFIG_TARGET_ALL_PROFILES=y
+            # CONFIG_IB_STANDALONE is not set
           EOF
           make defconfig
 
